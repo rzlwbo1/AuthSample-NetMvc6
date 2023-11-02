@@ -19,7 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(opt => 
-    opt.LoginPath = "/UserAuth/Login"
+    opt.LoginPath = "/Authentication/Login"
     );
 
 builder.Services.AddScoped<IUserAuthService, UserAuthService>();
@@ -47,6 +47,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Authentication}/{action=Login}/{id?}");
 
 app.Run();
