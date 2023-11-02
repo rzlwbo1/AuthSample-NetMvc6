@@ -1,4 +1,6 @@
 using AuthSampleRoleBased.Models.Domain;
+using AuthSampleRoleBased.Repositories.Abstract;
+using AuthSampleRoleBased.Repositories.Implementation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 builder.Services.ConfigureApplicationCookie(opt => 
     opt.LoginPath = "/UserAuth/Login"
     );
+
+builder.Services.AddScoped<IUserAuthService, UserAuthService>();
 
 
 var app = builder.Build();
