@@ -1,6 +1,16 @@
-﻿namespace AuthSampleRoleBased.Models.Domain
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace AuthSampleRoleBased.Models.Domain
 {
-    public class DatabaseContext
+    public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        {
+        }
+
+
+
+
     }
 }

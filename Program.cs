@@ -1,7 +1,25 @@
+using AuthSampleRoleBased.Models.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<DatabaseContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn")));
+
+
+// for identity
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(opt => 
+    opt.LoginPath = "/UserAuth/Login"
+    );
+
 
 var app = builder.Build();
 
@@ -17,6 +35,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// use auth
+app.UseAuthentication();
 
 app.UseAuthorization();
 
