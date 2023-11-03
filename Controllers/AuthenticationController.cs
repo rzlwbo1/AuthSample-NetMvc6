@@ -69,9 +69,10 @@ namespace AuthSampleRoleBased.Controllers
 
 
         [Authorize]
-        public async Task Logout()
+        public async Task<IActionResult> Logout()
         {
             await _userAuthService.LogoutAsync();
+            return RedirectToAction("Login");
         }
 
 
